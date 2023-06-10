@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 
-
-
 @layer base{
   @font-face {
     font-family: "readexPro";
@@ -15,6 +13,7 @@
     font-family: "PlusJakartaSans-400";
     src: url("../Fonts/PlusJakartaSans-Regular.ttf");
   }
+
   @font-face {
     font-family: "PlusJakartaSans-500";
     src: url("../Fonts/PlusJakartaSans-Medium.ttf");

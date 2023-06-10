@@ -13,3 +13,5 @@ pnpm dev
 ```
 
 ## Deployed Link
+
+    URL : https://cool-gumption-e8ec13.netlify.app
