@@ -6,24 +6,23 @@ module.exports = {
       "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
    ],
    theme: {
-      screens: {
-         mobile: 360,
-         tablet: 768,
-         laptop: 1280,
-         desktop: 1440,
-         lageDesktop: 2560,
-      },
       extend: {
          fontFamily: {
-            readex_600: ["readex-600"],
-            sans_400: ["jakarta_sans-400"],
-            sans_500: ["jakarta_sans-500"],
+            readex_600: "readexPro",
+            sans_400: "PlusJakartaSans-400",
+            sans_500: "PlusJakartaSans-500",
          },
-      },
-      colors: {
-         primary: "#F47F22",
-         white: "#fff",
-         dark: "#31374A",
+         colors: {
+            primary: "#F47F22",
+            white: "#fff",
+            text: "#31374A",
+         },
+         screens: {
+            mobile: "360",
+            tablet: "768",
+            laptop: "1280",
+            desktop: "1552",
+         },
       },
    },
    plugins: [],
