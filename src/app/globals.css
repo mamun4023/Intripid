@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 
+
+*{
+  margin: 0;
+}
+
+/* @layer components{
+  .btn{
+    @apply text-white  font-sans_500 bg-primary
+  }
+} */
+
 @layer base{
   @font-face {
     font-family: "readexPro";
@@ -19,3 +30,5 @@
     src: url("../Fonts/PlusJakartaSans-Medium.ttf");
   }
 }
+
+

@@ -1,4 +1,6 @@
 import Head from "next/head"
+import "./globals.css"
+
 export const metadata = {
   title: 'Intripid',
   description: 'A Travel by Intripid',
@@ -11,9 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <Head>
+      <Head>
           <link rel="icon" href="/favicon.ico" type="image/x-icon"  sizes="any"/>
-      </Head> */}
+      </Head>
       <body>{children}</body>
     </html>
   )
