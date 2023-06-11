@@ -1,11 +1,17 @@
-import Head from "next/head"
+
+import LanguageSelector from "@/components/LanguageSelector"
+
+
 
 export default function Page() {
+
   return (
 
-    <main className="flex font-sans_500  min-h-screen flex-col border  ">
-    
-      <button>Join Now</button>
+    <main className="flex w-full justify-center h-m-screen border ">
+ 
+  
+       <LanguageSelector />
+  
     </main>
     
    

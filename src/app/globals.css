@@ -3,32 +3,48 @@
 @tailwind utilities;
 
 
-
-*{
-  margin: 0;
-}
-
-/* @layer components{
-  .btn{
-    @apply text-white  font-sans_500 bg-primary
-  }
-} */
-
 @layer base{
   @font-face {
     font-family: "readexPro";
-    src: url("../Fonts/ReadexPro.ttf");
+    src: url("../fonts/ReadexPro.ttf");
   }
 
   @font-face {
     font-family: "PlusJakartaSans-400";
-    src: url("../Fonts/PlusJakartaSans-Regular.ttf");
+    src: url("../fonts/PlusJakartaSans-Regular.ttf");
   }
 
   @font-face {
     font-family: "PlusJakartaSans-500";
-    src: url("../Fonts/PlusJakartaSans-Medium.ttf");
+    src: url("../fonts/PlusJakartaSans-Medium.ttf");
   }
 }
 
 
+@layer components{
+  .btn{
+    @apply 
+      text-white 
+      font-sans_500 
+      rounded-md 
+      bg-primary 
+      p-2 text-[10px]
+      hover:bg-primaryDark
+  }
+  .headingTxt{
+    @apply
+      font-readex_600
+      text-[51px]
+      text-dark
+  }
+  .labelTxt1{
+    @apply
+      font-sans_500
+      text-dark
+  }
+  .labelTxt2{
+    @apply
+      font-sans_400
+      text-dark
+  }
+} 
