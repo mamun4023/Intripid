@@ -36,8 +36,8 @@ export default function LanguageSelector(){
     };
 
 
-    const OutsideClick = (event: React.MouseEvent)=>{
-        if(ref.current && !ref.current?.contains(event.target as Node)){
+    const OutsideClick = (e : MouseEvent) : void =>{
+        if(ref.current && !ref.current?.contains(e.target as Node)){
             setOpen(false)
         }
     }
