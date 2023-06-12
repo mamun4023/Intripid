@@ -21,6 +21,12 @@ export default function LanguageSelector(){
     const [value, setValue] = useState<string>("English");
     const [isHovered, setIsHovered] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement>(null);
+    
+    const setValueHandler = (e : string)=>{
+        setValue(e)
+        setOpen(false)
+    }
+
     const handleMouseEnter = () => {
       setIsHovered(true);
     };
@@ -46,7 +52,7 @@ export default function LanguageSelector(){
     },[])
 
     return(
-        <section className="h-[40px] w-full bg-secondary flex justify-end px-10">
+        <section className="h-[40px] w-full bg-secondary flex justify-end px-5 laptop:px-10">
             <div 
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave} 
@@ -59,12 +65,12 @@ export default function LanguageSelector(){
             </div>
             <div>
                 {open && 
-                    <div ref = {ref} className=" absolute right-6 top-11">
+                    <div ref = {ref} className=" bg-white absolute right-6 top-11">
                         <ul className="border shadow-md rounded-md w-[240px] divide-y">
                             {Language.map(data =>
                                 <li 
                                     key={data}
-                                    onClick={()=> setValue(data)} 
+                                    onClick={()=>setValueHandler(data)} 
                                     className="
                                         labelTx1 
                                         text-[14px] 

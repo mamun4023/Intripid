@@ -28,7 +28,8 @@
       font-sans_500 
       rounded-md 
       bg-primary 
-      p-2 text-[10px]
+      p-2 
+      text-[18px]
       hover:bg-primaryDark
   }
   .headingTxt{
@@ -46,5 +47,15 @@
     @apply
       font-sans_400
       text-dark
+  }
+  .linkTxt{
+    @apply
+      p-2
+      px-4 
+      text-dark 
+      font-sans_500 
+      text-[18px]
+      hover:cursor-pointer
+      hover:text-infoDark
   }
 } 
