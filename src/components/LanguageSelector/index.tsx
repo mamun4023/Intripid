@@ -4,7 +4,6 @@ import { MdOutlineLanguage } from "react-icons/md";
 import {SlArrowDown} from 'react-icons/sl'
 MdOutlineLanguage
 
-
 const Language : string[] = [
     "English",
     "Español",
@@ -14,7 +13,6 @@ const Language : string[] = [
     "中文 Chinese",
     "日本語 Nihongo"
 ]
-
 
 export default function LanguageSelector(){
     const [open, setOpen] = useState<boolean>(false)
@@ -41,7 +39,6 @@ export default function LanguageSelector(){
             setOpen(false)
         }
     }
-
 
     useEffect(()=>{
         document.addEventListener('click', OutsideClick, true);

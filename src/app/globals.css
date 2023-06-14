@@ -47,6 +47,7 @@
     @apply
       font-sans_400
       text-dark
+      text-[18px]
   }
   .linkTxt{
     @apply
@@ -57,5 +58,21 @@
       text-[18px]
       hover:cursor-pointer
       hover:text-infoDark
+  }
+
+  input{
+    @apply
+      w-full
+      h-[56px]
+      bg-secondaryLight
+      rounded-sm
+      border
+      border-secondary
+      px-[16px]
+      py-[24px]
+      text-secondary
+      font-sans_500
+      text-[16px]
+
   }
 } 
