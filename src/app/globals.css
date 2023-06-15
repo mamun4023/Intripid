@@ -60,7 +60,7 @@
       hover:text-infoDark
   }
 
-  input{
+  .input{
     @apply
       w-full
       h-[56px]
@@ -73,6 +73,13 @@
       text-secondary
       font-sans_500
       text-[16px]
-
+  }
+  .card {
+    @apply
+      w-[310px]
+      h-[368px]
+      bg-white
+      rounded-[32px]
+      p-[32px]
   }
 } 

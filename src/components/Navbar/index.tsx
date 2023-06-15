@@ -1,6 +1,7 @@
 "use client"
-import {PropsWithRef, useEffect, useRef, useState} from 'react'
+import {Dispatch, useEffect, useRef, useState, SetStateAction} from 'react'
 import Image from 'next/image'
+import _ from 'lodash';
 import Logo from '@/images/Logo.png'
 import MobileLogo from '@/images/mobileLogo.png'
 import NoteIcon from "@/images/note.png";
@@ -14,13 +15,20 @@ import {HiOutlineBuildingOffice2} from 'react-icons/hi2'
 import {motion, AnimatePresence} from 'framer-motion';
 
 
+
 export default function Navbar(){
     const [open, setOpen] = useState<boolean>(false);
-    const [show, setShow] = useState<boolean>(true)
-    const ref = useRef<HTMLDivElement>(null);
+    const [show, setShow] = useState<boolean>(false)
+    const ref = useRef<HTMLDivElement | null>(null);
+
+    
+   const handler = _.debounce(()=>{
+        setShow(prev=> !prev)
+   }, 500)
+
     const outSideClickHandler  = (e : MouseEvent)=>{
         if(ref.current && !ref.current.contains(e.target as Node)){
-
+            setShow(false)
         }
     }
 
@@ -34,8 +42,8 @@ export default function Navbar(){
 
 
     return(
-        <div className="w-full h-[107px] bg-white flex justify-center border shadow-sm">
-            <div className="flex items-center justify-between w-full laptop:w-4/5"> 
+        <div className="w-full h-[107px] bg-white flex justify-center border shadow-sm sticky top-0 ">
+            <div className="flex items-center justify-between w-full laptop:px-4 desktop:w-4/5 "> 
                 <div>
                     {/* desktop, tablet Logo */}
                     <Image 
@@ -55,15 +63,19 @@ export default function Navbar(){
                     />
                 </div>
                 <div className="flex items-center">
-                    <ul className='hidden laptop:flex items-center w-full'>
+                    <ul className='hidden laptop:flex items-center w-full relative'>
                         <li className="linkTxt">
                             <a > About </a>
                         </li>
-                        <li className='linkTxt relative flex items-center' onClick={()=> setShow(prev=>!prev)}>
+                        <li className='linkTxt  flex items-center' onClick={handler}>
                             <a className='pr-2'> Travel Solutions </a>
                             <SlArrowDown  size={14}/>
-                            {show && <DropDownMenu ref = {ref} setOpen = {setShow} />}
+                             
                         </li>
+                        <DropDownComponent 
+                            show = {show} 
+                             setShow = {setShow} 
+                        />
                         <li className='linkTxt'>
                             <a> Our Travelers </a>
                         </li>
@@ -91,11 +103,11 @@ export default function Navbar(){
                 <AnimatePresence > 
                     {open && 
                         <motion.div
-                            initial={{  x: 1024 }}
-                            animate={{  x: 0 }}
+                            initial={{ x: 1024 }}
+                            animate={{ x: 0 }}
                             transition={{ duration: 1}}
                             exit = {{ x : 1000}}
-                            className='h-screen p-4  w-full top-0 z-50 absolute bg-secondary'
+                            className='h-screen p-4  w-full top-0 z-50 fixed bg-secondary'
                         >
                                 <div className='flex justify-between items-center'>
                                     <Image 
@@ -120,10 +132,11 @@ export default function Navbar(){
                                         <li className='linkTxt py-2'>
                                             <a> About </a>
                                         </li>
-                                        <li className='linkTxt py-2 flex items-center'>
-                                            <a className='pr-2'> Travel Solutions </a>
+                                        <li onClick={handler} className='linkTxt py-2 flex items-center'>
+                                            <a className='pr-2'> Travel Solutions  </a>
                                             <SlArrowDown size={14} />
                                         </li>
+                                        {show && <DropDownComponent show = {show} setShow={setShow} />}
                                         <li className='linkTxt py-2'>
                                             <a> Our Travelers </a>
                                         </li>
@@ -143,51 +156,74 @@ export default function Navbar(){
 }
 
 
-const DropDownMenu = ({ref} : any)=>{
-   
-
-    return(
-        <div ref = {ref} className= "w-[941px] rounded-md bg-secondary h-[359px] shadow-xl absolute top-12 -left-80">
-            <div className='flex justify-between w-full '>
-                <div  className= "w-[385px] h-full border-primary p-[32px]">
-                    <div className='flex justify-between items-center '>
-                        <h6 className='font-readex_600 font-[21px] text-primary'>Travel Solutions</h6>
-                        <Image 
-                            src= {NoteIcon}
-                            width={27}
-                            height={24}
-                            alt="Notes"
-                        /> 
-                    </div>
-                    <div className='mt-6'>
-                        <p className='font-sans_400 text-dark text-[16px]'> Our solutions are designed primarily to assist travelers  by providing solutions  that takes the stress and burden of the upfront leisure travel planning.</p>
-                    </div>
-                </div>
-                <div className='p-[32px] w-[556px] text-dark font-sans_500 text-[16px]'>
-                    <ul className=' divide-y'>
-                        <li className='flex justify-between items-center p-4'> 
-                            <p >Personalized Destinations tree-palm </p>
-                            <LuPalmtree size={18} className='text-dark' />
-                        </li>
-                        <li className='flex justify-between items-center p-4'> 
-                            <p>Expert Travel Advisors</p>
-                            <FaUserTie size={18}  className='text-dark' />
-                        </li>
-                        <li className='flex justify-between items-center p-4'> 
-                            <p>Corporate Travel  Planning </p>
-                            <HiOutlineBuildingOffice2 size={18} className='text-dark' />
-                        </li>
-                        <li className='flex justify-between items-center p-4'> 
-                            <p>Travel Sponsorship</p>
-                            <GiReceiveMoney size={18} className='text-dark' />
-                        </li>
-                        <li className='flex justify-between items-center p-4'> 
-                            <p>Travel Points & Rewards Integration</p>
-                            <CgAirplane size={18} className='text-dark' />
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    );
+type Props  = {
+    show : boolean,
+    setShow: Dispatch<SetStateAction<boolean>>;
 }
+
+
+const DropDownComponent = ({show, setShow} : Props) => {
+    const ref = useRef<HTMLDivElement | null>(null);
+ 
+     const outSideClickHandler  = (e : MouseEvent)=>{
+         if(ref.current && !ref.current.contains(e.target as Node)){
+             setShow(false)
+         }
+     }
+ 
+     useEffect(()=>{
+         document.addEventListener('click', outSideClickHandler, true);
+         
+         return()=>{
+             document.removeEventListener('click', outSideClickHandler, false)
+         }
+     },[show])
+ 
+
+    return  show?(
+            <>
+                <div ref = {ref} className= "w-full p-8 laptop:p-1 laptop:w-[941px] rounded-md bg-secondary h-[359px] laptop:shadow-xl laptop:absolute top-12 -left-80 overflow-y-auto">
+                    <div className=' laptop:flex justify-between w-full '>
+                        <div  className= " w-full laptop:w-[385px] h-full border-primary laptop:p-[32px]">
+                            <div className='flex justify-between items-center '>
+                                <h6 className='font-readex_600 font-[21px] text-primary'>Travel Solutions</h6>
+                                <Image 
+                                    src= {NoteIcon}
+                                    width={27}
+                                    height={24}
+                                    alt="Notes"
+                                /> 
+                            </div>
+                            <div className=' my-4 laptop:mt-6'>
+                                <p className='font-sans_400 text-dark text-[16px]'> Our solutions are designed primarily to assist travelers  by providing solutions  that takes the stress and burden of the upfront leisure travel planning.</p>
+                            </div>
+                        </div>
+                        <div className='tablet:p-[32px] w-full laptop:w-[556px] text-dark font-sans_500 text-[16px]'>
+                            <ul className='divide-y'>
+                                <li className='flex justify-between items-center laptop:p-4'> 
+                                    <p >Personalized Destinations tree-palm </p>
+                                    <LuPalmtree size={18} className='text-dark' />
+                                </li>
+                                <li className='flex justify-between items-center py-2 laptop:p-4'> 
+                                    <p>Expert Travel Advisors</p>
+                                    <FaUserTie size={18}  className='text-dark' />
+                                </li>
+                                <li className='flex justify-between items-center py-2  laptop:p-4'> 
+                                    <p>Corporate Travel  Planning </p>
+                                    <HiOutlineBuildingOffice2 size={18} className='text-dark' />
+                                </li>
+                                <li className='flex justify-between items-center py-2  laptop:p-4'> 
+                                    <p>Travel Sponsorship</p>
+                                    <GiReceiveMoney size={18} className='text-dark' />
+                                </li>
+                                <li className='flex justify-between items-center py-2 laptop:p-4'> 
+                                    <p>Travel Points & Rewards Integration</p>
+                                    <CgAirplane size={18} className='text-dark' />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </>
+    ) :null
+} 

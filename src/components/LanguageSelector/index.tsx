@@ -18,7 +18,8 @@ export default function LanguageSelector(){
     const [open, setOpen] = useState<boolean>(false)
     const [value, setValue] = useState<string>("English");
     const [isHovered, setIsHovered] = useState<boolean>(false);
-    const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement | null>(null);
+    // console.log("open", open)
     
     const setValueHandler = (e : string)=>{
         setValue(e)
@@ -35,7 +36,7 @@ export default function LanguageSelector(){
 
 
     const OutsideClick = (e : MouseEvent) : void =>{
-        if(ref.current && !ref.current?.contains(e.target as Node)){
+        if(ref.current && !ref.current.contains(e.target as Node)){
             setOpen(false)
         }
     }
@@ -53,8 +54,8 @@ export default function LanguageSelector(){
             <div 
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave} 
-                onClick={()=>setOpen(prev => !prev)}
-                className="flex items-center hover:cursor-pointer group"
+                onClick={()=>setOpen(!open)}
+                className="flex items-center hover:cursor-pointer"
             >
                 <MdOutlineLanguage color={isHovered || open ? '#925DE8' : '#31374A'} size={16} />
                 <p className= {`px-2 text-[14px] text-dark font-sans_500  hover:text-info ${open? "text-infoDark" : null} `}>{value}</p>
@@ -62,7 +63,7 @@ export default function LanguageSelector(){
             </div>
             <div>
                 {open && 
-                    <div ref = {ref} className=" bg-white absolute right-6 top-11">
+                    <div ref = {ref} className=" bg-white absolute right-6 top-11 z-50">
                         <ul className="border shadow-md rounded-md w-[240px] divide-y">
                             {Language.map(data =>
                                 <li 
