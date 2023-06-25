@@ -42,12 +42,14 @@
     @apply
       font-sans_500
       text-dark
+      text-[18px]
   }
   .labelTxt2{
     @apply
       font-sans_400
       text-dark
-      text-[18px]
+      text-[16px]
+      leading-[24px]
   }
   .linkTxt{
     @apply
@@ -81,5 +83,11 @@
       bg-white
       rounded-[32px]
       p-[32px]
+  }
+  .icon {
+    @apply
+      w-[40px] 
+      h-[40px]
+      text-dark
   }
 } 
