@@ -6,19 +6,31 @@ import DecyPic from "@/images/demoPic/decy.jpg"
 import JeccyPic from "@/images/demoPic/jeccy.jpg"
 import KatePic from "@/images/demoPic/kate.jpg"
 import TeccyPic from "@/images/demoPic/teccy.jpg"
-
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
 // Import Swiper styles
 import "swiper/css"
+import { useRef } from "react"
 
 export default function Slider() {
+    const swiperRef = useRef()
     return (
-        <div className="flex justify-center">
-            <div className=" w-4/5 border-red-800 border-4">
+        <div className="flex justify-center my-10">
+            <div className="w-full laptop:w-4/5 flex items-center">
+                <button
+                    onClick={() => swiperRef.current.slidePrev()}
+                    className="btn bg-info  rounded-full "
+                >
+                    <FaArrowLeft />
+                </button>
                 <Swiper
                     // spaceBetween={2}
                     slidesPerView={1}
                     onSlideChange={() => console.log("slide change")}
                     onSwiper={(swiper) => console.log(swiper)}
+                    onBeforeInit={(swiper) => {
+                        swiperRef.current = swiper
+                    }}
+                    loop={true}
                     style={{ zIndex: -1 }}
                 >
                     {Data.map((data) => (
@@ -33,6 +45,12 @@ export default function Slider() {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                <button
+                    onClick={() => swiperRef.current.slideNext()}
+                    className="btn bg-info  rounded-full "
+                >
+                    <FaArrowRight />
+                </button>
             </div>
         </div>
     )
