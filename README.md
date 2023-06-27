@@ -2,14 +2,14 @@
 
 ## Getting Started
 
-First, run the development server:
+## run dev start
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+    npm run dev
+
+## Run production server
+
+    npm run start
 
 ## Deployed Link
 
-    URL : https://cool-gumption-e8ec13.netlify.app
+    [https://dazzling-hummingbird-16cba7.netlify.app]
