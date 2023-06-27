@@ -14,19 +14,16 @@ import { useRef } from "react"
 export default function Slider() {
     const swiperRef = useRef()
     return (
-        <div className="flex justify-center my-10">
-            <div className="w-full laptop:w-4/5 flex items-center">
+        <div className="flex justify-center my-10 mx-5 tablet:mx-0  ">
+            <div className="w-full tablet:w-4/5 flex items-center border">
                 <button
-                    onClick={() => swiperRef.current.slidePrev()}
+                    onClick={() => swiperRef.current.slideNext()}
                     className="btn bg-info  rounded-full "
                 >
                     <FaArrowLeft />
                 </button>
                 <Swiper
-                    // spaceBetween={2}
                     slidesPerView={1}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
                     onBeforeInit={(swiper) => {
                         swiperRef.current = swiper
                     }}
@@ -34,19 +31,32 @@ export default function Slider() {
                     style={{ zIndex: -1 }}
                 >
                     {Data.map((data) => (
-                        <SwiperSlide>
-                            <div>
-                                <Image
-                                    src={data.pic}
-                                    className="w-full"
-                                    alt=""
-                                />
+                        <SwiperSlide key={data.id}>
+                            <div className="grid grid-cols-1 p-5">
+                                <div className="col-span-1 flex justify-center ">
+                                    <Image
+                                        src={data.pic}
+                                        className="w-60 h-60 rounded-full border-2 border-info"
+                                        alt=""
+                                    />
+                                </div>
+                                <div className=" py-5 ">
+                                    <h6 className="headingTxt text-center text-[20px]">
+                                        {data.name} ,{" "}
+                                        <span className="text-[16px]">
+                                            {data.title}
+                                        </span>
+                                    </h6>
+                                    <p className="labelTxt2 text-center pt-3">
+                                        "{data.comment}. "
+                                    </p>
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))}
                 </Swiper>
                 <button
-                    onClick={() => swiperRef.current.slideNext()}
+                    onClick={() => swiperRef.current.slidePrev()}
                     className="btn bg-info  rounded-full "
                 >
                     <FaArrowRight />

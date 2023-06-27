@@ -47,7 +47,7 @@ export default function LanguageSelector(){
         return ()=>{
             document.removeEventListener('click', OutsideClick, false)
         }
-    },[])
+    })
 
     return(
         <section className="h-[40px] w-full bg-secondary flex justify-end px-5 laptop:px-10">
