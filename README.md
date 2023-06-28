@@ -1,6 +1,4 @@
-# Intripid Web site for travel agency
-
-## Getting Started
+# Intripid Web site for travel agency. Its an open source project.
 
 ## run dev start
 
@@ -12,4 +10,4 @@
 
 ## Deployed Link
 
-    [https://dazzling-hummingbird-16cba7.netlify.app]
+    https://dazzling-hummingbird-16cba7.netlify.app
